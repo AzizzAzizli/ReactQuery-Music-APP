@@ -17,6 +17,11 @@
     box-shadow: -1.44px 0px 5.76px 0px rgba(255, 255, 255, 0.15) inset, 0px 11.52px 8.64px 0px rgba(0, 0, 0, 0.05);
     backdrop-filter: blur(28px);
 }
+.overlay{
+    background-color: rgba(0, 0, 0, 0.475); /* Siyah renk ve %50 opaklık */
+    width: 100%;
+
+}
 
 @tailwind base;
 @tailwind components;
