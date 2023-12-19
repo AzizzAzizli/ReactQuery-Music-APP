@@ -1,10 +1,8 @@
 /* eslint-disable react/prop-types */
-const Layout = ({ children }) => {
+const Layout = () => {
   return (
-    <div>
-        {
-            children
-        }
+    <div className="layout w-[70%] h-full p-7">
+
     </div>
   )
 }
