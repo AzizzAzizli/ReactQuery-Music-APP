@@ -1,6 +1,3 @@
-import React from "react";
-import style from "./LayoutHeader.module.css";
-
 import icon from "../../assets/icons/layoutHeaderIcon/layoutHeaderIcon.svg";
 
 export const LayoutHeader = () => {
