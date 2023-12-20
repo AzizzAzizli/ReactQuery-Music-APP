@@ -1,7 +1,6 @@
-import { LayoutHeader } from "../../atoms/LayoutHeader"
-import { LayoutInput } from "../../atoms/LayoutInput"
+import { LayoutHeader } from "../LayoutHeader/index"
+import { LayoutInput } from "../LayoutInput/index"
 
-/* eslint-disable react/prop-types */
 const Layout = () => {
   return (
     <div className="layout w-[70%] h-full p-7">
