@@ -1,6 +1,13 @@
-.input{
+.form{
     background: rgba(0, 0, 0, 0.14);
     letter-spacing: 2px;
     text-transform: capitalize;
-    
+}
+
+.input{
+    background: transparent;
+    text-transform: capitalize;
+    outline: none;
+
+    color: rgba(255, 255, 255, 0.74);
 }
