@@ -1,0 +1,52 @@
+.cardTitle {
+  color: #fff;
+  font-size: 20.16px;
+  font-style: normal;
+  font-weight: 400;
+  text-transform: capitalize;
+  max-width: 200px ;
+  overflow-x: auto;
+  white-space: nowrap;
+
+  &&::-webkit-scrollbar {
+    height: 4px;
+  }
+  
+&&::-webkit-scrollbar-thumb {
+background-color: #3498db;
+}
+  
+}
+.cardDesc {
+
+    &&::-webkit-scrollbar {
+        height: 2px;
+      }
+      
+&&::-webkit-scrollbar-thumb {
+    background-color: #3498db;
+  }
+
+  color: rgba(255, 255, 255, 0.64);
+  font-size: 17.28px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-transform: capitalize;
+  max-width: 200px ;
+  overflow-x: auto;
+
+  white-space: nowrap;
+
+}
+.cardBottom{
+    display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: flex-start;
+gap: 11.52px;
+}
+.imgSize{
+    max-width: 250.56px;
+max-height: 250.56px;
+}

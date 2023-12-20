@@ -25,6 +25,21 @@
 .description{
     color: rgba(255, 255, 255, 0.64);
 }
+.cardBody{
+    padding-right: 5px;
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+height: 400px;
+    overflow-y: auto;
+
+   &&::-webkit-scrollbar {
+        width: 2px;
+      }
+      
+&&::-webkit-scrollbar-thumb {
+    background-color: #3498db; /* Kaydırma çubuğu rengi */
+  }
+}
 
 @tailwind base;
 @tailwind components;
