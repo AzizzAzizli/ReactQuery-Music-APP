@@ -1,0 +1,1 @@
+export const baseUrl = "https://youtube-music-api3.p.rapidapi.com/"
