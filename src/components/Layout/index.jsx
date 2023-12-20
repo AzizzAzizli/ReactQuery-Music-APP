@@ -5,9 +5,9 @@ import { LayoutHeader } from "../LayoutHeader/index";
 import { LayoutInput } from "../LayoutInput/index";
 import { Card } from "../Card";
 import { useQuery, } from "react-query";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 const Layout = () => {
-
+const [musicName,setMusicName]=useState("")
     const {
       data: quickMusics,
       isLoading,
@@ -27,15 +27,49 @@ const Layout = () => {
       refetchIntervalInBackground: false,
       refetchOnWindowFocus: false,
     });
+  
+    // const {
+    //   data: musicDatas,
+    //   isLoading,
+    //   isError,
+    //   error,
+    //   refetch
+    // } = useQuery({
+    //   queryKey: "musicDatas",
+    //   queryFn: async () => {
+    //     const response = await ()=>searchMusic();
+    //     return response.data.results
+    //   },
+    //   onError: (err) => {
+    //     console.log("err", err);
+    //   },
+    //   refetchInterval: false,
+    //   refetchIntervalInBackground: false,
+    //   refetchOnWindowFocus: false,
+    // });
 
+
+function handleEnter(e) {
+  // console.log(e.key);
+  if (e.key === "Enter") {
+    console.log((musicName));
+    setMusicName("")
+  }
+}
+  function handleInputValue(e) {
+    // console.log(e.target.value);
+    let value=e.target.value;
+    setMusicName(value)
+}
     return (
       <div className="layout w-[70%] h-full p-7">
         <LayoutHeader
+          
           headTitle={"Playlist"}
-          description={"304 Playlist"}
+          description={`${quickMusics?quickMusics?.length:"..."} Playlist`}
           icon={layoutHeaderIcon}
         />
-        <LayoutInput />
+        <LayoutInput value={musicName} onKeyDown={handleEnter} onChange={handleInputValue } />
 
         {
           isLoading ? 

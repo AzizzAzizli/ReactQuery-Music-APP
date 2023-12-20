@@ -10,7 +10,12 @@ const instanceAxios = axios.create({
     }
 });
 
+
 export const getQuickMusic = async () => {
     const response = await instanceAxios.get(`recommend`);
     return response;
 };
+
+// export const searchMusic = async (value) => {
+//     const respons =await instanceAxios.get(`search`, value);
+// }
