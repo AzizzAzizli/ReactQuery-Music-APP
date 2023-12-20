@@ -9,7 +9,7 @@ const Sidebar = () => {
     <div className="sidebar flex flex-col gap-10 w-[30%] h-full  p-7">
         <LayoutHeader 
             headTitle={"Library"} 
-            description={"Library"} 
+            description={"All Music"} 
             icon={SettingIcon} 
         />
 
