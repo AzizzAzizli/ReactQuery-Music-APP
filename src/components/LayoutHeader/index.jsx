@@ -9,7 +9,7 @@ export const LayoutHeader = ({ headTitle , description , icon }) => {
           <img src={icon} alt="" />
         </div>
           </div>
-          <p className=" text-xl font-normal  text-black opacity-60">{description}</p>
+          <p className="description text-xl font-normal">{description}</p>
     </header>
   );
 };
