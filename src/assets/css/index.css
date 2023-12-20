@@ -29,12 +29,12 @@
     padding-right: 5px;
     display: grid;
     grid-template-columns: repeat(4,1fr);
-height: 400px;
+    height: calc(100vh - 50%);
     overflow-y: auto;
 
-   &&::-webkit-scrollbar {
+    &&::-webkit-scrollbar {
         width: 2px;
-      }
+    }
       
 &&::-webkit-scrollbar-thumb {
     background-color: #3498db; /* Kaydırma çubuğu rengi */

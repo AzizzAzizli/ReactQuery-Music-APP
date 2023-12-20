@@ -18,11 +18,11 @@ const Sidebar = () => {
                 title={"Home"}
                 icon={HomeIcon}
             />
+            
              <SidebarItem
                 title={"Favourites"}
                 icon={FavouritesIcon}
             />
-            
         </div>
     </div>
   )

@@ -1,16 +1,15 @@
-import React from "react";
-import cardimg from "../../assets/images/cardImg/cardImg.svg";
+/* eslint-disable react/prop-types */
 import style from "./card.module.css";
 
-export const Card = () => {
+export const Card = ({ title , thumbnail , author }) => {
   return (
     <div className={`${style.cardBottom}`}>
-      <div className={`${style.imgSize} rounded-xl`}>
-        <img src={cardimg} alt="" />
+      <div className={`${style.imgSize} w-full rounded-xl overflow-hidden h-full`}>
+        <img src={thumbnail} className="w-full h-full object-cover" alt="" />
       </div>
       <div>
-        <p className={`${style.cardTitle}`}>hollywood</p>
-        <p className={`${style.cardDesc}`}>babbu maan</p>
+        <p className={`${style.cardTitle}`}>{ title }</p>
+        <p className={`${style.cardDesc}`}>{author}</p>
       </div>
     </div>
   );
