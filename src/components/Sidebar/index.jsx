@@ -1,14 +1,29 @@
+import SettingIcon from '../../assets/icons/setting/setting.svg'
+import FavouritesIcon from '../../assets/icons/favouritesIcon/favouritesIcon.svg'
+import HomeIcon from '../../assets/icons/homeIcon/homeIcon.svg'
 import { LayoutHeader } from '../LayoutHeader/index'
-import layoutHeaderIcon from '../../assets/icons/layoutHeaderIcon/layoutHeaderIcon.svg'
+import SidebarItem from '../SidebarItem/SidebarItem'
 
 const Sidebar = () => {
   return (
-    <div className="sidebar w-[30%] h-full  p-7">
+    <div className="sidebar flex flex-col gap-10 w-[30%] h-full  p-7">
         <LayoutHeader 
             headTitle={"Library"} 
             description={"Library"} 
-            icon={layoutHeaderIcon} 
+            icon={SettingIcon} 
         />
+
+        <div className='flex flex-col gap-9'>
+            <SidebarItem
+                title={"Home"}
+                icon={HomeIcon}
+            />
+             <SidebarItem
+                title={"Favourites"}
+                icon={FavouritesIcon}
+            />
+            
+        </div>
     </div>
   )
 }
