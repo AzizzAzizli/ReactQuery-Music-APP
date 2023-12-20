@@ -20,7 +20,10 @@
 .overlay{
     background-color: rgba(0, 0, 0, 0.475); /* Siyah renk ve %50 opaklık */
     width: 100%;
+}
 
+.description{
+    color: rgba(255, 255, 255, 0.64);
 }
 
 @tailwind base;
