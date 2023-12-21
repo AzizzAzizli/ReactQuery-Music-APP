@@ -1,6 +1,9 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable react/display-name */
+import React from "react";
 import style from "./input.module.css";
 
-export const LayoutInput = ({onKeyDown,ref}) => {
+export const LayoutInput = React.forwardRef(({ onKeyDown }, ref) => {
   return (
     <div className={`${style.form} flex items-center gap-2 rounded-xl h-10 ps-3 pe-4`}>
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -14,5 +17,5 @@ export const LayoutInput = ({onKeyDown,ref}) => {
         placeholder="Search Playlist"
       />
     </div>
-  );
-};
+  )
+})
