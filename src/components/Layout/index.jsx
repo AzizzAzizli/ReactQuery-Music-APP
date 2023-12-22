@@ -1,203 +1,240 @@
 /* eslint-disable react/jsx-key */
 import layoutHeaderIcon from "../../assets/icons/layoutHeaderIcon/layoutHeaderIcon.svg";
-import { getQuickMusic, searchMusic , getMusicInfo } from "../../services/index";
+import { getQuickMusic, searchMusic, getMusicInfo } from "../../services/index";
 import { LayoutHeader } from "../LayoutHeader/index";
 import { LayoutInput } from "../LayoutInput/index";
 import { Card } from "../Card";
 import { useQuery } from "react-query";
 import { useRef, useState } from "react";
+
+
 const Layout = () => {
-    let inputRef = useRef();
-    const [musicName, setMusicName] = useState("");
-    const [videoId, setVideoId] = useState("")
+  let Favorites = JSON.parse(localStorage.getItem("favorites")) ?? [];
 
-    const handleEnter = (e) => {
-      let value = inputRef.current.value;
-    
-      if (e.key === "Enter") {
-        setMusicName(value);
-        refetchMusic();
-        inputRef.current.value = "";
-      }
+  let inputRef = useRef();
+  const [musicName, setMusicName] = useState("");
+  // const [videoId, setVideoId] = useState("")
+
+
+
+  const handleEnter = (e) => {
+    let value = inputRef.current.value;
+
+    if (e.key === "Enter") {
+      setMusicName(value);
+      refetchMusic();
+      inputRef.current.value = "";
     }
+  };
 
-    const { data: quickMusics, isLoading: quickMusicsLoading } = useQuery({
-      queryKey: "quickMusic",
-      queryFn: async () => {
-        const response = await getQuickMusic();
-        return response.data.results;
-      },
-      onError: (err) => {
-        console.log("err", err);
-      },
+  const { data: quickMusics, isLoading: quickMusicsLoading } = useQuery({
+    queryKey: "quickMusic",
+    queryFn: async () => {
+      const response = await getQuickMusic();
+      return response.data.results;
+    },
+    onError: (err) => {
+      console.log("err", err);
+    },
 
-      refetchInterval: false,
-      refetchIntervalInBackground: false,
-      refetchOnWindowFocus: false,
-    });
-    
-    const { data: musicDatas, isLoading: searchLoading , refetch: refetchMusic } = useQuery({
-        queryKey: ["musicDatas",musicName],
-        queryFn: async () => {
-            const response = await searchMusic(musicName);
-            return response.data.result;
-        },
-        onError: (err) => {
-            console.log("err", err);
-        },
-        refetchInterval: false,
-        refetchIntervalInBackground: false,
-        refetchOnWindowFocus: false,
-    });
+    refetchInterval: false,
+    refetchIntervalInBackground: false,
+    refetchOnWindowFocus: false,
+  });
 
-    const { data: audioData, isLoading: audioLoading } = useQuery({
-        queryKey: ["audioData",videoId],
-        queryFn: async () => {
-            const response = await getMusicInfo(videoId);
-            return response;
-        },
-        onError: (err) => {
-            console.log("err", err);
-        },
-        refetchInterval: false,
-        refetchIntervalInBackground: false,
-        refetchOnWindowFocus: false,
-    });
+  const {
+    data: musicDatas,
+    isLoading: searchLoading,
+    refetch: refetchMusic,
+  } = useQuery({
+    queryKey: ["musicDatas", musicName],
+    queryFn: async () => {
+      const response = await searchMusic(musicName);
+      return response.data.result;
+    },
+    onError: (err) => {
+      console.log("err", err);
+    },
+    refetchInterval: false,
+    refetchIntervalInBackground: false,
+    refetchOnWindowFocus: false,
+  });
 
-    const callBackClick = async (videoId) => {
-        setVideoId(videoId)
+  // const { data: audioData, isLoading: audioLoading } = useQuery({
+  //     queryKey: ["audioData",videoId],
+  //     queryFn: async () => {
+  //         const response = await getMusicInfo(videoId);
+  //         return response;
+  //     },
+  //     onError: (err) => {
+  //         console.log("err", err);
+  //     },
+  //     refetchInterval: false,
+  //     refetchIntervalInBackground: false,
+  //     refetchOnWindowFocus: false,
+  // });
+
+  // const callBackClick = async (videoId) => {
+  //     setVideoId(videoId)
+  // }
+
+  const callBackFavourites = (item) => {
+    // console.log(item);
+  
+    const favMusic = {
+      imgUrl: item.thumbnail,
+      title: item.title,
+      author: item.author,
+      id:item.videoId
+    };
+  
+    // Check if the item is already in the favorites
+    const isInclude = Favorites.find(item => item.id === favMusic.id)
+  
+    // console.log(isInclude);
+    console.log(Favorites);
+  
+    // Update the favorites list
+    if (isInclude) {
+      // Remove the item from favorites
+      const updatedFavorites = Favorites.filter((fav) => (
+        fav.title !== favMusic.title || fav.author !== favMusic.author
+      ));
+      Favorites = updatedFavorites;
+    } else {
+      // Add the item to favorites
+      Favorites.push(favMusic);
     }
+  
+    // Update local storage
+    localStorage.setItem("favourites", JSON.stringify(Favorites));
+  };
+  
 
-    const callBackFavourites = (item) => {
-       console.log(item);
-    }
+  return (
+    <div className="layout w-[70%] h-full p-7">
+      <LayoutHeader
+        headTitle={"Playlist"}
+        description={`${quickMusics ? quickMusics?.length : "..."} Playlist`}
+        icon={layoutHeaderIcon}
+      />
 
-    return (
-      <div className="layout w-[70%] h-full p-7">
-        <LayoutHeader
-          headTitle={"Playlist"}
-          description={`${quickMusics ? quickMusics?.length : "..."} Playlist`}
-          icon={layoutHeaderIcon}
-        />
+      <LayoutInput ref={inputRef} onKeyDown={handleEnter} />
 
-        <LayoutInput ref={inputRef} onKeyDown={handleEnter} />
-
-        {quickMusicsLoading || searchLoading ? (
-          <div
-            aria-label="Loading..."
-            role="status"
-            className="flex justify-center w-full items-center mt-20 space-x-2"
+      {quickMusicsLoading || searchLoading ? (
+        <div
+          aria-label="Loading..."
+          role="status"
+          className="flex justify-center w-full items-center mt-20 space-x-2"
+        >
+          <svg
+            className="h-20 w-20 animate-spin stroke-gray-500"
+            viewBox="0 0 256 256"
           >
-            <svg
-              className="h-20 w-20 animate-spin stroke-gray-500"
-              viewBox="0 0 256 256"
-            >
-              <line
-                x1="128"
-                y1="32"
-                x2="128"
-                y2="64"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="24"
-              ></line>
-              <line
-                x1="195.9"
-                y1="60.1"
-                x2="173.3"
-                y2="82.7"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="24"
-              ></line>
-              <line
-                x1="224"
-                y1="128"
-                x2="192"
-                y2="128"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="24"
-              ></line>
-              <line
-                x1="195.9"
-                y1="195.9"
-                x2="173.3"
-                y2="173.3"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="24"
-              ></line>
-              <line
-                x1="128"
-                y1="224"
-                x2="128"
-                y2="192"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="24"
-              ></line>
-              <line
-                x1="60.1"
-                y1="195.9"
-                x2="82.7"
-                y2="173.3"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="24"
-              ></line>
-              <line
-                x1="32"
-                y1="128"
-                x2="64"
-                y2="128"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="24"
-              ></line>
-              <line
-                x1="60.1"
-                y1="60.1"
-                x2="82.7"
-                y2="82.7"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="24"
-              ></line>
-            </svg>
-            <span className="text-4xl font-medium text-gray-500">Loading...</span>
-          </div>
-        ) : ("")}
+            <line
+              x1="128"
+              y1="32"
+              x2="128"
+              y2="64"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="24"
+            ></line>
+            <line
+              x1="195.9"
+              y1="60.1"
+              x2="173.3"
+              y2="82.7"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="24"
+            ></line>
+            <line
+              x1="224"
+              y1="128"
+              x2="192"
+              y2="128"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="24"
+            ></line>
+            <line
+              x1="195.9"
+              y1="195.9"
+              x2="173.3"
+              y2="173.3"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="24"
+            ></line>
+            <line
+              x1="128"
+              y1="224"
+              x2="128"
+              y2="192"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="24"
+            ></line>
+            <line
+              x1="60.1"
+              y1="195.9"
+              x2="82.7"
+              y2="173.3"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="24"
+            ></line>
+            <line
+              x1="32"
+              y1="128"
+              x2="64"
+              y2="128"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="24"
+            ></line>
+            <line
+              x1="60.1"
+              y1="60.1"
+              x2="82.7"
+              y2="82.7"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="24"
+            ></line>
+          </svg>
+          <span className="text-4xl font-medium text-gray-500">Loading...</span>
+        </div>
+      ) : (
+        ""
+      )}
 
-        <section className={`cardBody gap-[23.04px]`}>
-            {
-              musicDatas ? (
-                musicDatas.map((musicItem) => (
-                  <Card 
-                      key={musicItem.videoId} 
-                      cardDetail={musicItem} 
-                      callBackClick={callBackClick}
-                      callBackFavourites={callBackFavourites}
-                  />
-                ))
-              ) : ""
-            }
+      <section className={`cardBody gap-[23.04px]`}>
+        {musicDatas
+          ? musicDatas.map((musicItem) => (
+              <Card
+                key={musicItem.videoId}
+                cardDetail={musicItem}
+                // callBackClick={callBackClick}
+                callBackFavourites={callBackFavourites}
+              />
+            ))
+          : ""}
 
-            {
-              searchLoading ? ("") : (
-                quickMusics?.map((musicItem) => (
-                  <Card 
-                      key={musicItem.videoId} 
-                      cardDetail={musicItem} 
-                      callBackClick={callBackClick}
-                      callBackFavourites={callBackFavourites}
-                  />
-                ))
-              )
-            }
-        </section>
-      </div>
-    )
+        {searchLoading
+          ? ""
+          : quickMusics?.map((musicItem) => (
+              <Card
+                key={musicItem.videoId}
+                cardDetail={musicItem}
+                // callBackClick={callBackClick}
+                callBackFavourites={callBackFavourites}
+              />
+            ))}
+      </section>
+    </div>
+  );
 };
 
 export default Layout;

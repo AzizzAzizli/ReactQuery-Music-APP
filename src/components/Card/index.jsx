@@ -1,10 +1,10 @@
 /* eslint-disable react/prop-types */
 import style from "./card.module.css";
 
-export const Card = ({ cardDetail, callBackClick , callBackFavourites }) => {
+export const Card = ({ cardDetail, callBackFavourites }) => {
     return (
       <div
-        onClick={() => callBackClick(cardDetail.videoId)}
+        // onClick={() => callBackClick(cardDetail.videoId)}
         className={`${style.cardBottom} group relative transition-transform duration-300 ease-in-out transform hover:scale-100`}
       >
         <div className={`${style.imgSize} w-full rounded-xl overflow-hidden h-full relative`}>
