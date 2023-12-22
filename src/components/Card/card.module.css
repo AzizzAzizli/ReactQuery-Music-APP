@@ -12,6 +12,18 @@
     display: none;
   }
 }
+.divv{
+  animation: slide-up 0.5s ease-in-out;
+}
+
+@keyframes slide-up {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
 .cardDesc {
     color: rgba(255, 255, 255, 0.64);
     font-size: 17.28px;

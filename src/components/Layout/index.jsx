@@ -10,7 +10,7 @@ const Layout = () => {
     let inputRef = useRef();
     const [musicName, setMusicName] = useState("");
     const [videoId, setVideoId] = useState("")
-    
+
     const handleEnter = (e) => {
       let value = inputRef.current.value;
     
@@ -63,10 +63,13 @@ const Layout = () => {
         refetchIntervalInBackground: false,
         refetchOnWindowFocus: false,
     });
-    console.log(audioData,audioLoading);
 
     const callBackClick = async (videoId) => {
         setVideoId(videoId)
+    }
+
+    const callBackFavourites = (item) => {
+       console.log(item);
     }
 
     return (
@@ -174,6 +177,7 @@ const Layout = () => {
                       key={musicItem.videoId} 
                       cardDetail={musicItem} 
                       callBackClick={callBackClick}
+                      callBackFavourites={callBackFavourites}
                   />
                 ))
               ) : ""
@@ -186,6 +190,7 @@ const Layout = () => {
                       key={musicItem.videoId} 
                       cardDetail={musicItem} 
                       callBackClick={callBackClick}
+                      callBackFavourites={callBackFavourites}
                   />
                 ))
               )
