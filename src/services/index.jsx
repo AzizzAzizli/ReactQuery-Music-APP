@@ -5,17 +5,15 @@ const instanceAxios = axios.create({
   baseURL: baseUrl,
   params: { gl: "ID" },
   headers: {
-    "X-RapidAPI-Key": "9076eac4a5msha9000f7a84a1cb1p112ed6jsn13542991e11b",
-    "X-RapidAPI-Host": "youtube-music-api3.p.rapidapi.com",
-  },
+    'X-RapidAPI-Key': 'b54b07eecbmsha8aa20deb149865p126ba0jsnbfa90474c239',
+    'X-RapidAPI-Host': 'youtube-music-api3.p.rapidapi.com'
+  }
 });
 
 export const getQuickMusic = async () => {
   const response = await instanceAxios.get(`recommend`);
   return response;
 };
-
-
 
 export const searchMusic = async (value) => {
   const response = await instanceAxios.get(`search`, {
@@ -24,10 +22,24 @@ export const searchMusic = async (value) => {
       type: "song",
     },
     headers: {
-      "X-RapidAPI-Key": "f54eea0568msh2bd264fabc3a92bp19a66ajsnbc96b4f8fbe7",
-      "X-RapidAPI-Host": "youtube-music-api3.p.rapidapi.com",
-    },
+      'X-RapidAPI-Key': 'b54b07eecbmsha8aa20deb149865p126ba0jsnbfa90474c239',
+      'X-RapidAPI-Host': 'youtube-music-api3.p.rapidapi.com'
+    }
   });
 
   return response;
 };
+
+export const getMusicInfo = async (musicId) => {
+  const response = await instanceAxios.get(`music/info`, {
+      params: {
+        id: musicId,
+      },
+      headers: {
+        'X-RapidAPI-Key': 'b54b07eecbmsha8aa20deb149865p126ba0jsnbfa90474c239',
+        'X-RapidAPI-Host': 'youtube-music-api3.p.rapidapi.com'
+      }
+  });
+
+  return response;
+}

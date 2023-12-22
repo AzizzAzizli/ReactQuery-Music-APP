@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-key */
 import layoutHeaderIcon from "../../assets/icons/layoutHeaderIcon/layoutHeaderIcon.svg";
-import { getQuickMusic, searchMusic } from "../../services/index";
+import { getQuickMusic, searchMusic , getMusicInfo } from "../../services/index";
 import { LayoutHeader } from "../LayoutHeader/index";
 import { LayoutInput } from "../LayoutInput/index";
 import { Card } from "../Card";
@@ -9,20 +9,17 @@ import { useRef, useState } from "react";
 const Layout = () => {
     let inputRef = useRef();
     const [musicName, setMusicName] = useState("");
-
-    const { data: musicDatas, isLoading: searchLoading , refetch: refetchMusic } = useQuery({
-        queryKey: ["musicDatas",musicName],
-        queryFn: async () => {
-            const response = await searchMusic(musicName);
-            return response.data.result;
-        },
-        onError: (err) => {
-            console.log("err", err);
-        },
-        refetchInterval: false,
-        refetchIntervalInBackground: false,
-        refetchOnWindowFocus: false,
-    });
+    const [videoId, setVideoId] = useState("")
+    
+    const handleEnter = (e) => {
+      let value = inputRef.current.value;
+    
+      if (e.key === "Enter") {
+        setMusicName(value);
+        refetchMusic();
+        inputRef.current.value = "";
+      }
+    }
 
     const { data: quickMusics, isLoading: quickMusicsLoading } = useQuery({
       queryKey: "quickMusic",
@@ -38,17 +35,40 @@ const Layout = () => {
       refetchIntervalInBackground: false,
       refetchOnWindowFocus: false,
     });
+    
+    const { data: musicDatas, isLoading: searchLoading , refetch: refetchMusic } = useQuery({
+        queryKey: ["musicDatas",musicName],
+        queryFn: async () => {
+            const response = await searchMusic(musicName);
+            return response.data.result;
+        },
+        onError: (err) => {
+            console.log("err", err);
+        },
+        refetchInterval: false,
+        refetchIntervalInBackground: false,
+        refetchOnWindowFocus: false,
+    });
 
-    const handleEnter = (e) => {
-      let value = inputRef.current.value;
-    
-      if (e.key === "Enter") {
-        setMusicName(value);
-        refetchMusic();
-        inputRef.current.value = "";
-      }
+    const { data: audioData, isLoading: audioLoading } = useQuery({
+        queryKey: ["audioData",videoId],
+        queryFn: async () => {
+            const response = await getMusicInfo(videoId);
+            return response;
+        },
+        onError: (err) => {
+            console.log("err", err);
+        },
+        refetchInterval: false,
+        refetchIntervalInBackground: false,
+        refetchOnWindowFocus: false,
+    });
+    console.log(audioData,audioLoading);
+
+    const callBackClick = async (videoId) => {
+        setVideoId(videoId)
     }
-    
+
     return (
       <div className="layout w-[70%] h-full p-7">
         <LayoutHeader
@@ -146,12 +166,30 @@ const Layout = () => {
           </div>
         ) : ("")}
 
-        <section className={` gap-[23.04px] cardBody`}>
-            {musicDatas ? musicDatas.map((musicItem) => (
-                <Card {...musicItem} key={musicItem.videoId} />
-            )) : quickMusics?.map((musicItem) => (
-              <Card {...musicItem} key={musicItem.videoId} />
-          ))}
+        <section className={`cardBody gap-[23.04px]`}>
+            {
+              musicDatas ? (
+                musicDatas.map((musicItem) => (
+                  <Card 
+                      key={musicItem.videoId} 
+                      cardDetail={musicItem} 
+                      callBackClick={callBackClick}
+                  />
+                ))
+              ) : ""
+            }
+
+            {
+              searchLoading ? ("") : (
+                quickMusics?.map((musicItem) => (
+                  <Card 
+                      key={musicItem.videoId} 
+                      cardDetail={musicItem} 
+                      callBackClick={callBackClick}
+                  />
+                ))
+              )
+            }
         </section>
       </div>
     )
