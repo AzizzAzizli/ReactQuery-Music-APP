@@ -89,15 +89,15 @@ const Layout = () => {
   };
   
 
-  function isFav(item) {
-    
-    const isInclude = Favorites.find((favs) => favs.id === item.id);
-console.log(isInclude);
-    if (isInclude) {
-      return true
-    }
-  return false
-}
+//   function isFav(item) {
+//    console.log(item);
+//     const isInclude = Favorites.find((favs) => favs.id === item.id);
+//     console.log(isInclude);
+//     if (isInclude) {
+//       return true
+//     }
+//   return false
+// }
 
   return (
     <div className="layout w-[70%] h-full p-7">
@@ -200,27 +200,37 @@ console.log(isInclude);
 
       <section className={`cardBody gap-[23.04px]`}>
         {musicDatas
-          ? musicDatas.map((musicItem) => (
-              <Card
+          ? musicDatas.map((musicItem) =>{
+            let isFav = Favorites.find((favs) => favs.id === musicItem.videoId)
+
+          return(
+
+            <Card
+            isFav={!!isFav}
                 key={musicItem.videoId}
                 cardDetail={musicItem}
                 // callBackClick={callBackClick}
                 callBackFavourites={callBackFavourites}
               />
-            ))
+            )})
           : ""}
 
         {searchLoading
           ? ""
-          : quickMusics?.map((musicItem) => (
+          : quickMusics?.map((musicItem) => {
+            let isFav = Favorites.find((favs) => favs.id === musicItem.videoId)
+            // console.log(musicItem);
+        return  (
+            
             <Card
-              isFav={()=>isFav(musicItem)}
-                key={musicItem.videoId}
-                cardDetail={musicItem}
-                // callBackClick={callBackClick}
-                callBackFavourites={callBackFavourites}
-              />
-            ))}
+              
+              isFav={!!isFav}
+              key={musicItem.videoId}
+              cardDetail={musicItem}
+              // callBackClick={callBackClick}
+              callBackFavourites={callBackFavourites}
+            />
+          )})}
       </section>
     </div>
   );
