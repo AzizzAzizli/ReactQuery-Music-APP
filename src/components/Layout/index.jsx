@@ -57,23 +57,9 @@ const Layout = () => {
     refetchOnWindowFocus: false,
   });
 
-  // const { data: audioData, isLoading: audioLoading } = useQuery({
-  //     queryKey: ["audioData",videoId],
-  //     queryFn: async () => {
-  //         const response = await getMusicInfo(videoId);
-  //         return response;
-  //     },
-  //     onError: (err) => {
-  //         console.log("err", err);
-  //     },
-  //     refetchInterval: false,
-  //     refetchIntervalInBackground: false,
-  //     refetchOnWindowFocus: false,
-  // });
 
-  // const callBackClick = async (videoId) => {
-  //     setVideoId(videoId)
-  // }
+
+
 
   const callBackFavourites = (item) => {
 
@@ -102,6 +88,16 @@ const Layout = () => {
     localStorage.setItem("favorites", JSON.stringify(Favorites));
   };
   
+
+  function isFav(item) {
+    
+    const isInclude = Favorites.find((favs) => favs.id === item.id);
+console.log(isInclude);
+    if (isInclude) {
+      return true
+    }
+  return false
+}
 
   return (
     <div className="layout w-[70%] h-full p-7">
@@ -217,7 +213,8 @@ const Layout = () => {
         {searchLoading
           ? ""
           : quickMusics?.map((musicItem) => (
-              <Card
+            <Card
+              isFav={()=>isFav(musicItem)}
                 key={musicItem.videoId}
                 cardDetail={musicItem}
                 // callBackClick={callBackClick}

@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import style from "./card.module.css";
 
-export const Card = ({ cardDetail, callBackFavourites }) => {
+export const Card = ({ cardDetail, callBackFavourites, isFav }) => {
     return (
       <div
         // onClick={() => callBackClick(cardDetail.videoId)}
@@ -11,7 +11,7 @@ export const Card = ({ cardDetail, callBackFavourites }) => {
           <img src={cardDetail.thumbnail} className="w-full h-full object-cover" alt="" />
           <div className={`${style.divv} cursor-pointer hidden group-hover:flex items-center justify-center absolute inset-0 text-white bg-black bg-opacity-50 transition duration-300 ease-in-out `}>
             <button className="bg-gray-600" onClick={() => callBackFavourites(cardDetail)}>
-                Add Fav
+              {isFav?"Remove fav":"Add fav"}
             </button>
           </div>
         </div>
