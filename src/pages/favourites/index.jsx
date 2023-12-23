@@ -29,8 +29,11 @@ const Favourites = () => {
   function isFav(item) {
     
     const isInclude = favorites.find((favs) => favs.id === item.id);
+
     if (isInclude) {
+
       return true
+
     }
   return false
 }
@@ -51,14 +54,17 @@ const Favourites = () => {
         />
 
         <section className={`cardBody gap-[23.04px]`}>
-          {favorites?.map((musicItem) => (
+          {favorites?.map((musicItem) =>{
+                let isFav = favorites.find((favs) => favs.id === musicItem.id)
+          return (
             <Card
-              isFav={()=>isFav(musicItem)}
+              isFav={() => isFav(musicItem)}
               key={musicItem.id}
               cardDetail={musicItem}
               callBackFavourites={callBackFavourites}
             />
-          ))}
+          )
+          })}
         </section>
       </div>
     </div>
