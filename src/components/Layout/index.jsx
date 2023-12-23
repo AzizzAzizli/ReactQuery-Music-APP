@@ -79,6 +79,7 @@ const Layout = () => {
   // }
 
   const callBackFavourites = (item) => {
+
     // console.log(item);
   
     const favMusic = {
@@ -88,26 +89,20 @@ const Layout = () => {
       id:item.videoId
     };
   
-    // Check if the item is already in the favorites
     const isInclude = Favorites.find(item => item.id === favMusic.id)
   
-    // console.log(isInclude);
-    console.log(Favorites);
-  
-    // Update the favorites list
+    // console.log(Favorites);
+    
     if (isInclude) {
-      // Remove the item from favorites
       const updatedFavorites = Favorites.filter((fav) => (
         fav.title !== favMusic.title || fav.author !== favMusic.author
       ));
       Favorites = updatedFavorites;
     } else {
-      // Add the item to favorites
       Favorites.push(favMusic);
     }
   
-    // Update local storage
-    localStorage.setItem("favourites", JSON.stringify(Favorites));
+    localStorage.setItem("favorites", JSON.stringify(Favorites));
   };
   
 
