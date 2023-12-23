@@ -7,7 +7,7 @@ const Home = () => {
         <img className='  absolute object-cover top-0 left-0 w-full h-full -z-10' src={Background} alt="BackGroundImg" />
         <Sidebar />
       
-        <Layout />
+        <Layout  />
     </div>
   )
 }
