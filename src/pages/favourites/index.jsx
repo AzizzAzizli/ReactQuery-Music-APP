@@ -26,15 +26,7 @@ const Favourites = () => {
     }
   };
 
-  function isFav(item) {
-    
-    const isInclude = favorites.find((favs) => favs.id === item.id);
 
-    if (isInclude) {
-
-      return true
-
-    }
   return false
 }
 
