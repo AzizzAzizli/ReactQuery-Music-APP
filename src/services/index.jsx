@@ -5,7 +5,7 @@ const instanceAxios = axios.create({
   baseURL: baseUrl,
   params: { gl: "ID" },
   headers: {
-    'X-RapidAPI-Key': 'b54b07eecbmsha8aa20deb149865p126ba0jsnbfa90474c239',
+    'X-RapidAPI-Key': '5c4135ca85mshe30698e9ae6eae8p18b24fjsn3b1a3834023c',
     'X-RapidAPI-Host': 'youtube-music-api3.p.rapidapi.com'
   }
 });
@@ -22,7 +22,7 @@ export const searchMusic = async (value) => {
       type: "song",
     },
     headers: {
-      'X-RapidAPI-Key': 'b54b07eecbmsha8aa20deb149865p126ba0jsnbfa90474c239',
+      'X-RapidAPI-Key': '5c4135ca85mshe30698e9ae6eae8p18b24fjsn3b1a3834023c',
       'X-RapidAPI-Host': 'youtube-music-api3.p.rapidapi.com'
     }
   });
