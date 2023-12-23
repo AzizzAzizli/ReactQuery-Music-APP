@@ -17,11 +17,13 @@ const Sidebar = () => {
             <SidebarItem
                 title={"Home"}
                 icon={HomeIcon}
+                route={"/"}
             />
             
              <SidebarItem
                 title={"Favourites"}
                 icon={FavouritesIcon}
+                route={"/favourites"}
             />
         </div>
     </div>

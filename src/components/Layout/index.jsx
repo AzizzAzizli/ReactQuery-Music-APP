@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-key */
 import layoutHeaderIcon from "../../assets/icons/layoutHeaderIcon/layoutHeaderIcon.svg";
-import { getQuickMusic, searchMusic, getMusicInfo } from "../../services/index";
+import { getQuickMusic, searchMusic } from "../../services/index";
 import { LayoutHeader } from "../LayoutHeader/index";
 import { LayoutInput } from "../LayoutInput/index";
 import { Card } from "../Card";
@@ -13,9 +13,6 @@ const Layout = () => {
 
   let inputRef = useRef();
   const [musicName, setMusicName] = useState("");
-  // const [videoId, setVideoId] = useState("")
-
-
 
   const handleEnter = (e) => {
     let value = inputRef.current.value;
@@ -83,7 +80,7 @@ const Layout = () => {
     // console.log(item);
   
     const favMusic = {
-      imgUrl: item.thumbnail,
+      thumbnail: item.thumbnail,
       title: item.title,
       author: item.author,
       id:item.videoId

@@ -1,7 +1,10 @@
+import { useNavigate } from "react-router-dom"
+
 /* eslint-disable react/prop-types */
-const SidebarItem = ({ title , icon }) => {
+const SidebarItem = ({ title , icon , route }) => {
+  const navigate = useNavigate()
   return (
-    <div className="flex gap-6 items-center cursor-pointer">
+    <div onClick={() => navigate(route)} className="flex gap-6 items-center cursor-pointer">
         <img 
             alt="" 
             src={icon} 

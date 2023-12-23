@@ -1,4 +1,5 @@
 const Router = {
-    home: "/"
+    home: "/",
+    favourites: "/favourites",
 }
 export default Router
