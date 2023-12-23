@@ -27,8 +27,6 @@ const Favourites = () => {
   };
 
 
-  return false
-}
 
   return (
     <div className="overlay flex relative w-full h-[100vh] p-12">
