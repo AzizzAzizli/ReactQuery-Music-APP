@@ -48,7 +48,7 @@ const Favourites = () => {
                 let isFav = favorites.find((favs) => favs.id === musicItem.id)
           return (
             <Card
-              isFav={() => isFav(musicItem)}
+              isFav={isFav}
               key={musicItem.id}
               cardDetail={musicItem}
               callBackFavourites={callBackFavourites}
