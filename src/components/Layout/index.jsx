@@ -64,7 +64,7 @@ const Layout = () => {
   const callBackFavourites = (item) => {
 
     // console.log(item);
-  
+    
     const favMusic = {
       thumbnail: item.thumbnail,
       title: item.title,
@@ -206,7 +206,7 @@ const Layout = () => {
           return(
 
             <Card
-            isFav={!!isFav}
+            isFav={isFav}
                 key={musicItem.videoId}
                 cardDetail={musicItem}
                 // callBackClick={callBackClick}
@@ -224,7 +224,7 @@ const Layout = () => {
             
             <Card
               
-              isFav={!!isFav}
+              isFav={isFav}
               key={musicItem.videoId}
               cardDetail={musicItem}
               // callBackClick={callBackClick}
