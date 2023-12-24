@@ -34,9 +34,7 @@ export const Card = ({ cardDetail, callBackFavourites, isFav }) => {
           className={`${style.divv} cursor-pointer hidden group-hover:flex items-center justify-center absolute inset-0 text-white bg-black bg-opacity-50 transition duration-300 ease-in-out `}
         >
           <button
-            className={`${
-              localIsFav ? "bg-red-700" : "bg-green-700"
-            } rounded-md p-1`}
+          
             onClick={() => favButtonClick(cardDetail)}
           >
             {localIsFav ? (
