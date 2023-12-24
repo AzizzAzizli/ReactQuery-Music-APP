@@ -64,15 +64,15 @@ const Layout = () => {
   const callBackFavourites = (item) => {
 
     // console.log(item);
-    
+
     const favMusic = {
       thumbnail: item.thumbnail,
       title: item.title,
       author: item.author,
-      id:item.videoId
+      videoId:item.videoId
     };
   
-    const isInclude = Favorites.find(item => item.id === favMusic.id)
+    const isInclude = Favorites.find(item => item.videoId === favMusic.videoId)
   
     // console.log(Favorites);
     
@@ -201,7 +201,7 @@ const Layout = () => {
       <section className={`cardBody gap-[23.04px]`}>
         {musicDatas
           ? musicDatas.map((musicItem) =>{
-            let isFav = Favorites.find((favs) => favs.id === musicItem.videoId)
+            let isFav = Favorites.find((favs) => favs.videoId === musicItem.videoId)
 
           return(
 
@@ -218,7 +218,7 @@ const Layout = () => {
         {searchLoading
           ? ""
           : quickMusics?.map((musicItem) => {
-            let isFav = Favorites.find((favs) => favs.id === musicItem.videoId)
+            let isFav = Favorites.find((favs) => favs.videoId === musicItem.videoId)
             // console.log(musicItem);
         return  (
             

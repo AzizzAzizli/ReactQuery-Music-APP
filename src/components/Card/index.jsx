@@ -10,6 +10,11 @@ export const Card = ({ cardDetail, callBackFavourites, isFav }) => {
     setLocalIsFav((prev) => !prev);
   }
 
+  function watchOnYouTube(id) {
+    const youtubeUrl = `https://www.youtube.com/watch?v=${id}`;
+    window.open(youtubeUrl, "_blank");
+  }
+
   return (
     <div
       // onClick={() => callBackClick(cardDetail.videoId)}
@@ -35,7 +40,7 @@ export const Card = ({ cardDetail, callBackFavourites, isFav }) => {
         </div>
       </div>
       <div>
-        <p className={`${style.cardTitle}`}>{cardDetail.title}</p>
+        <p onClick={()=>watchOnYouTube(cardDetail.videoId)} className={`${style.cardTitle} cursor-pointer`}>{cardDetail.title}</p>
         <p className={`${style.cardDesc}`}>{cardDetail.author}</p>
       </div>
     </div>
