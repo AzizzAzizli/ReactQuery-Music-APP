@@ -14,7 +14,7 @@ const Favourites = () => {
   }, []);
 
   const callBackFavourites = (item) => {
-    const isInclude = favorites.find((favs) => favs.id === item.id);
+    const isInclude = favorites.find((favs) => favs.videoId === item.videoId);
 
     if (isInclude) {
       const updatedFavorites = favorites.filter(
@@ -45,11 +45,11 @@ const Favourites = () => {
 
         <section className={`cardBody gap-[23.04px]`}>
           {favorites?.map((musicItem) =>{
-                let isFav = favorites.find((favs) => favs.id === musicItem.id)
+                let isFav = favorites.find((favs) => favs.videoId === musicItem.videoId)
           return (
             <Card
               isFav={isFav}
-              key={musicItem.id}
+              key={musicItem.videoId}
               cardDetail={musicItem}
               callBackFavourites={callBackFavourites}
             />
