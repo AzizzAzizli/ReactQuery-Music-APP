@@ -1,6 +1,8 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
 import style from "./card.module.css";
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 
 export const Card = ({ cardDetail, callBackFavourites, isFav }) => {
   const [localIsFav, setLocalIsFav] = useState(isFav);
@@ -32,15 +34,30 @@ export const Card = ({ cardDetail, callBackFavourites, isFav }) => {
           className={`${style.divv} cursor-pointer hidden group-hover:flex items-center justify-center absolute inset-0 text-white bg-black bg-opacity-50 transition duration-300 ease-in-out `}
         >
           <button
-            className={`${localIsFav?"bg-red-700":"bg-green-700"} rounded-md p-1`}
+            className={`${
+              localIsFav ? "bg-red-700" : "bg-green-700"
+            } rounded-md p-1`}
             onClick={() => favButtonClick(cardDetail)}
           >
-            {localIsFav ? "Remove fav" : "Add fav"}
+            {localIsFav ? (
+              < > <FavoriteIcon  sx={{ fontSize: 40 }} /> </>
+         
+            ) : (
+              <>
+                {" "}
+                <FavoriteBorderOutlinedIcon sx={{ fontSize: 50 }}  />{" "}
+              </>
+            )}
           </button>
         </div>
       </div>
       <div>
-        <p onClick={()=>watchOnYouTube(cardDetail.videoId)} className={`${style.cardTitle} cursor-pointer`}>{cardDetail.title}</p>
+        <p
+          onClick={() => watchOnYouTube(cardDetail.videoId)}
+          className={`${style.cardTitle} cursor-pointer hover:text-gray-400`}
+        >
+          {cardDetail.title}
+        </p>
         <p className={`${style.cardDesc}`}>{cardDetail.author}</p>
       </div>
     </div>
